@@ -1,0 +1,255 @@
+//Fuente google fonts
+$bellefair: 'Bellefair', serif;
+$crema: #ebe7de;
+
+/* Crear un mixing de cero */
+@mixin background_image($pagina){
+   
+    background-image: url(../img/destacadas/chico/#{$pagina}.jpg);
+    @include breakpoint(medium){
+        background-image: url(../img/destacadas/mediano/#{$pagina}.jpg);
+    }
+    @include breakpoint(large){
+        background-image: url(../img/destacadas/grande/#{$pagina}.jpg);
+    }
+}
+
+body{
+    background-color: $crema;
+}
+.contenedor{
+    @include xy-grid-container();
+    
+}
+.contenido-principal{
+    background-color: $white;
+    padding: rem-calc(10);
+    @include breakpoint(medium){
+        margin-top: rem-calc(-120);
+        position: relative;
+        padding: rem-calc(50, 80);
+    }
+
+}
+
+blockquote{
+    font-size: rem-calc(30);
+}
+
+.efecto-imagen{
+    @include rotate(-10);
+    width: 90%;
+    @include shadow();
+    border: rem-cacl(10) solid $white;
+    @include breakpoint(small only){
+        margin-bottom: rem-calc(70);
+
+    }
+
+}
+
+//Encabezados
+.encabezado{
+    color: $secondary-color;
+    @include text-transform(uppercase);
+    font-size: rem-calc(18);
+    margin-bottom: rem-calc(50);
+    text-align: center;
+    width: 100%;
+    span {
+        color: $primary-color;
+        font-size: rem-calc(38);
+        display: table;
+        margin: 0 auto;
+
+    }
+   
+    &:after{
+        content: '';
+        display: block;
+        margin: rem-calc(-15) 0 auto auto;
+        background-size: rem-calc(80);
+        @include box(rem-calc(80), rem-cacl(80));
+        background-image: url(../img/coffee.svg);
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+  
+}
+
+.icono-menu{
+    @include hamburger($white, $white, 50px, 32px, 6px, 3);
+}
+
+.site-header{
+    .contenedor{
+        z-index: 1;
+        @include position(relative);
+    }
+    @include position(relative);
+    background-repeat: no-repeat;
+    height: 100vh;
+    min-height: rem-cacl(600);
+    background-size: cover;
+
+    &.inicio{
+        @include background_image(inicio);
+    }
+    &.nosotros{
+        @include background_image(nosotros);
+    }
+    &.proceso{
+        @include background_image(proceso);
+
+    }
+
+    .header-superior{
+        @include xy-grid();
+        @include flex-align(center, top);
+        @include breakpoint(medium){
+            @include flex-align(justify, top)
+        }
+        @include padding(2);
+        .logo{
+            @include xy-cell(6);
+
+            @include breakpoint(medium){
+                @include xy-cell(25%);
+                
+
+            }
+
+
+        }
+    }
+
+    .header-slogan{
+        @include xy-grid();
+        @include flex-align(center, middle);
+        height: rem-calc(300);
+        .slogan{
+            color: $white;
+            @include font-bold(900);
+            @include text-transform(uppercase);
+
+        }
+
+    }
+    &:after{
+        background: linear-gradient(to bottom, rgba(0,0,0,0.7) 20%, rgba(0, 0, 0, .3));
+        content: '';
+        @include position(absolute, 0,0,0,0);
+        @include box(100%, 100%);
+    }
+
+    .title-bar{
+        background-color: $primary-color;
+        @include flex-align(center, middle);
+    }
+    .title-bar-title{
+        margin-left: rem-calc(20);
+    }
+}
+
+.navegacion{
+    @include xy-cell();
+    @include breakpoint(medium){
+        @include xy-cell(auto);
+    }
+
+    .menu-principal{
+        @include breakpoint(small only){
+            background-color: lighten($primary-color, 10%);
+        }
+        @include menu-base();
+        @include flex-align(right, middle);
+        li{
+            @include breakpoint(small only){
+                width: 100%;
+                text-align: center,
+            }
+            a{
+                @include text-transform(uppercase);
+                @include font-bold(700);
+                font-size: rem-cacl(18);
+            }
+        }
+    }
+}
+
+.menu-social{
+    @include menu-base();
+
+    @include flex-align(center, middle);
+    @include breakpoint(medium){
+        @include flex-align(right, middle);
+    }
+    margin-bottom: rem-calc(20);
+    a{
+        &:before{
+            display: inline-block;
+            font-family: 'Fontawesome';
+            font-size: rem-calc(30);
+            color: $white;
+            -webkit-font-smoothing: antialeased;
+            content:  '\f08e';
+        }
+        &[href*="facebook.com"]::before{content: '\f082';};
+        &[href*="twitter.com"]::before{content: '\f099';};
+        &[href*="instagram.com"]::before{content: '\f16d';};
+        &[href*="youtube.com"]::before{content: '\f16a';};
+    }
+}
+
+.site-footer{
+    background-color: $primary-color;
+    .contenedor{
+        .contenido-footer{
+            background-color: $white;
+            @include xy-grid();
+            @include padding(2,2, 4, 2);
+            .footer-box{
+                @include margin(null, null, 2);
+                @include xy-cell();
+                @include breakpoint(medium){
+                    @include xy-cell(4);
+                }
+                text-align: center;
+                h3{
+                    font-family: $bellefair;
+                    color: $secondary-color;
+                    @include text-transform(uppercase);
+                }
+                p{
+                    font-size: rem-calc(18);
+                    margin: 0;
+                }
+            }
+        }
+    }
+    .copyright{
+        margin: 0;
+        @include padding(1, null, 1, null);
+        text-align: center;
+        @include font-bold(900);
+        color: $white;
+        font-size: rem-calc(18);
+
+    }
+}
+
+/* Pagina nosotros */
+.pagina-nosotros{
+    @include xy-grid();
+    .imagen-nosotros, .contenido-nosotros{
+        @include xy-cell();
+        @include breakpoint(medium){
+            @include xy-cell(50%);
+
+        }
+    }
+    p{
+        line-height: rem-calc(40);
+    }
+    
+}
